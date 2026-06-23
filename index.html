@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Yash Sachitanand Dongre" />
+    <meta name="description" content="Mechatronics Engineer (M.Sc.) specialising in Robotics, Automation & Embedded Systems. Based in Weingarten, Germany." />
+    <title>Yash Dongre | Mechatronics Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue:    #005A9B;
+            --blue-lt: #1a7fc1;
+            --dark:    #0d1117;
+            --dark2:   #161b22;
+            --dark3:   #21262d;
+            --border:  #30363d;
+            --text:    #e6edf3;
+            --muted:   #8b949e;
+            --accent:  #58a6ff;
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text); line-height: 1.6; }
+        a { color: var(--accent); text-decoration: none; transition: opacity .2s; }
+        a:hover { opacity: .75; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 2rem; height: 56px;
+            background: rgba(13,17,23,.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo { font-weight: 700; font-size: 1rem; color: var(--accent); }
+        .nav-links { display: flex; gap: 1.6rem; list-style: none; }
+        .nav-links a { font-size: .85rem; color: var(--muted); font-weight: 500; }
+        .nav-links a:hover { color: var(--text); opacity: 1; }
+
+        /* HERO */
+        #hero {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 6rem 2rem 4rem;
+            position: relative; overflow: hidden;
+        }
+        #hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,90,155,.35) 0%, transparent 70%),
+                        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(88,166,255,.12) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-inner { position: relative; max-width: 700px; }
+        .avatar-wrap {
+            width: 130px; height: 130px; border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--blue-lt); overflow: hidden;
+            box-shadow: 0 0 30px rgba(0,90,155,.5);
+        }
+        .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        #hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; color: #fff; letter-spacing: -.02em; }
+        #hero h1 span { color: var(--accent); }
+        .hero-tagline { margin-top: .5rem; font-size: clamp(.95rem, 2.5vw, 1.2rem); color: var(--muted); }
+        .hero-sub { margin-top: .4rem; font-size: .9rem; color: var(--muted); font-style: italic; }
+        .badge-row { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+        .badge { background: var(--dark3); border: 1px solid var(--border); border-radius: 999px; padding: .3rem .85rem; font-size: .78rem; color: var(--muted); }
+        .hero-cta { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn { display: inline-flex; align-items: center; gap: .4rem; padding: .55rem 1.4rem; border-radius: 6px; font-size: .88rem; font-weight: 600; transition: transform .15s, box-shadow .15s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(88,166,255,.25); opacity: 1; }
+        .btn-primary { background: var(--blue); color: #fff; border: 1px solid var(--blue-lt); }
+        .btn-outline  { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+        .social-row { margin-top: 1.6rem; display: flex; gap: 1.2rem; justify-content: center; }
+        .social-row a { display: flex; align-items: center; gap: .35rem; font-size: .82rem; color: var(--muted); font-weight: 500; }
+        .social-row a:hover { color: var(--accent); opacity: 1; }
+        .social-row svg { width: 16px; height: 16px; fill: currentColor; }
+
+        /* SECTIONS */
+        section { padding: 5rem 2rem; }
+        .container { max-width: 960px; margin: 0 auto; }
+        .section-title { font-size: 1.4rem; font-weight: 700; color: var(--accent); border-left: 3px solid var(--blue); padding-left: .75rem; margin-bottom: 2rem; }
+
+        /* ABOUT */
+        #about { background: var(--dark2); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+        .about-text p { color: var(--muted); font-size: .95rem; line-height: 1.75; }
+        .about-text p + p { margin-top: 1rem; }
+        .about-stats { display: flex; flex-direction: column; gap: 1rem; }
+        .stat-card { background: var(--dark3); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; }
+        .stat-card .num { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+        .stat-card .label { font-size: .8rem; color: var(--muted); margin-top: .1rem; }
+
+        /* EXPERIENCE */
+        #experience { background: var(--dark); }
+        .timeline { position: relative; padding-left: 1.5rem; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 2px; background: var(--border); }
+        .tl-item { position: relative; padding: 0 0 2.2rem 1.4rem; }
+        .tl-item::before { content: ''; position: absolute; left: -1.6rem; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--blue); border: 2px solid var(--dark); box-shadow: 0 0 0 3px var(--blue-lt); }
+        .tl-date { font-size: .75rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin-bottom: .3rem; }
+        .tl-title { font-size: 1rem; font-weight: 600; color: var(--text); }
+        .tl-company { font-size: .85rem; color: var(--accent); margin-bottom: .6rem; }
+        .tl-bullets { list-style: disc; padding-left: 1.2rem; }
+        .tl-bullets li { font-size: .85rem; color: var(--muted); margin-bottom: .3rem; line-height: 1.6; }
+
+        /* PROJECTS */
+        #projects { background: var(--dark2); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.4rem; }
+
+        .project-card {
+            background: var(--dark3); border: 1px solid var(--border);
+            border-radius: 12px; overflow: hidden;
+            transition: border-color .2s, transform .2s;
+            display: flex; flex-direction: column;
+        }
+        .project-card:hover { border-color: var(--blue-lt); transform: translateY(-3px); }
+
+        /* Image Slideshow */
+        .slideshow { position: relative; width: 100%; height: 200px; overflow: hidden; background: var(--dark); }
+        .slideshow img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .5s ease; }
+        .slideshow img.active { opacity: 1; }
+        .slide-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,.55); border: none; color: #fff;
+            width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+            font-size: .85rem; display: flex; align-items: center; justify-content: center;
+            z-index: 2; transition: background .2s;
+        }
+        .slide-btn:hover { background: rgba(0,90,155,.8); }
+        .slide-prev { left: 8px; }
+        .slide-next { right: 8px; }
+        .slide-dots { position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; }
+        .slide-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.35); cursor: pointer; transition: background .2s; }
+        .slide-dot.active { background: #fff; }
+        .no-photo { width: 100%; height: 200px; background: var(--dark); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+
+        .project-body { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+        .p-tag { font-size: .7rem; font-weight: 600; background: rgba(0,90,155,.3); color: var(--accent); border-radius: 4px; padding: .15rem .5rem; display: inline-block; margin-bottom: .7rem; font-family: 'JetBrains Mono', monospace; }
+        .project-body h3 { font-size: .97rem; font-weight: 600; margin-bottom: .5rem; }
+        .project-body p { font-size: .82rem; color: var(--muted); line-height: 1.65; flex: 1; }
+        .p-meta { margin-top: .9rem; display: flex; flex-wrap: wrap; gap: .35rem; }
+        .tag { font-size: .7rem; background: var(--dark2); border: 1px solid var(--border); border-radius: 4px; padding: .15rem .5rem; color: var(--muted); }
+        .p-report { margin-top: .8rem; }
+        .p-report a { font-size: .78rem; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: .25rem .7rem; display: inline-flex; align-items: center; gap: .3rem; }
+        .p-report a:hover { background: rgba(88,166,255,.1); opacity: 1; }
+
+        /* SKILLS */
+        #skills { background: var(--dark); }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+        .skill-group { background: var(--dark2); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem; }
+        .skill-group h4 { font-size: .8rem; font-weight: 600; color: var(--accent); margin-bottom: .7rem; text-transform: uppercase; letter-spacing: .06em; }
+        .skill-group ul { list-style: none; }
+        .skill-group ul li { font-size: .82rem; color: var(--muted); padding: .2rem 0; border-bottom: 1px solid var(--border); }
+        .skill-group ul li:last-child { border-bottom: none; }
+
+        /* EDUCATION */
+        #education { background: var(--dark2); }
+        .edu-cards { display: flex; flex-direction: column; gap: 1rem; }
+        .edu-card { background: var(--dark3); border: 1px solid var(--border); border-radius: 8px; padding: 1.2rem 1.4rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+        @media (max-width: 540px) { .edu-card { flex-direction: column; } }
+        .edu-card .degree { font-size: .95rem; font-weight: 600; }
+        .edu-card .institution { font-size: .83rem; color: var(--accent); margin-top: .2rem; }
+        .edu-card .focus { font-size: .78rem; color: var(--muted); margin-top: .4rem; }
+        .edu-card .period { font-size: .75rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
+
+        /* CERTIFICATIONS */
+        #certifications { background: var(--dark); }
+        .cert-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: .8rem; }
+        .cert-item { background: var(--dark2); border: 1px solid var(--border); border-radius: 8px; padding: .9rem 1.1rem; display: flex; gap: .7rem; align-items: flex-start; }
+        .cert-icon { font-size: 1.2rem; flex-shrink: 0; }
+        .cert-item .cert-name { font-size: .83rem; font-weight: 600; }
+        .cert-item .cert-source { font-size: .75rem; color: var(--muted); margin-top: .15rem; }
+
+        /* CONTACT */
+        #contact { background: var(--dark2); text-align: center; }
+        #contact p { color: var(--muted); max-width: 500px; margin: 0 auto 1.8rem; font-size: .92rem; }
+        .contact-links { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
+        .contact-btn { display: flex; align-items: center; gap: .5rem; background: var(--dark3); border: 1px solid var(--border); border-radius: 8px; padding: .7rem 1.2rem; font-size: .85rem; font-weight: 500; color: var(--text); transition: border-color .2s, transform .2s; }
+        .contact-btn:hover { border-color: var(--accent); transform: translateY(-2px); opacity: 1; color: var(--accent); }
+        .contact-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+        footer { text-align: center; padding: 1.5rem; background: var(--dark); font-size: .78rem; color: var(--muted); border-top: 1px solid var(--border); }
+
+        /* SCROLL REVEAL */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <span class="nav-logo">YD</span>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <div class="hero-inner">
+        <div class="avatar-wrap">
+            <img src="Photo.jpeg" alt="Yash Dongre"
+                 onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:var(--dark3);display:flex;align-items:center;justify-content:center;font-size:3rem\'>👨‍🔧</div>'" />
+        </div>
+        <h1>I am <span>Yash Dongre</span></h1>
+        <p class="hero-tagline">Mechatronics Engineer (M.Sc.) &nbsp;|&nbsp; Robotics · Automation · Embedded Systems</p>
+        <p class="hero-sub">Designing systems that sense, think, and move.</p>
+        <div class="badge-row">
+            <span class="badge">📍 Weingarten, Germany</span>
+            <span class="badge">🎓 RWU — M.Sc. Mechatronics</span>
+            <span class="badge">🔍 Open to Werkstudent / Internship</span>
+        </div>
+        <div class="hero-cta">
+            <a class="btn btn-primary" href="#contact">Get In Touch</a>
+            <a class="btn btn-outline" href="#projects">See Projects</a>
+        </div>
+        <div class="social-row">
+            <a href="https://github.com/yashstudy2025-collab" target="_blank">
+                <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38l-.01-1.34c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.88-1.17-.88-1.17-.72-.49.05-.48.05-.48.8.06 1.22.82 1.22.82.71 1.22 1.87.87 2.32.66.07-.52.28-.87.51-1.07-1.77-.2-3.63-.89-3.63-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82A7.68 7.68 0 0 1 8 3.8c.68 0 1.36.09 2 .27 1.52-1.03 2.19-.82 2.19-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/yash-dongre-/" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+            </a>
+            <a href="mailto:Yashsachitanand.dongre@gmail.com">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Email
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <h2 class="section-title reveal">About Me</h2>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>Mechatronics M.Sc. student at <strong>RWU Weingarten</strong> with a strong Mechanical Engineering foundation and <strong>2+ years of industrial experience</strong> in sensor-driven condition-based monitoring, equipment maintenance, and reliability engineering.</p>
+                <p>I love working at the intersection of <strong>Mechanical + Electrical + Electronics + Software</strong> — be it in automotive, industrial automation, or robotics. I combine hands-on hardware integration with software skills in Python, MATLAB, and ROS2 to build systems that sense, think, and act.</p>
+                <p>Currently seeking a <strong>Werkstudent or Internship</strong> in Robotics, Automation, Mechatronics, or Embedded Systems in Germany.</p>
+            </div>
+            <div class="about-stats reveal">
+                <div class="stat-card"><div class="num">2+</div><div class="label">Years Industrial Experience (EU + India)</div></div>
+                <div class="stat-card"><div class="num">30+</div><div class="label">Engineering Projects Delivered</div></div>
+                <div class="stat-card"><div class="num">AIR 8</div><div class="label">All-India Rank – AIRC Go-Kart Championship</div></div>
+                <div class="stat-card"><div class="num">11</div><div class="label">National-level Exhibition Awards</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title reveal">Experience</h2>
+        <div class="timeline">
+            <div class="tl-item reveal">
+                <div class="tl-date">Sep 2025 – Present</div>
+                <div class="tl-title">Robotics Systems Engineer / Co-Founder</div>
+                <div class="tl-company">H.O.M.E. Makerspace Hub, RWU Weingarten · Germany</div>
+                <ul class="tl-bullets">
+                    <li>Driving system-level hardware integration; commissioning customised sensor arrays and test rigs for real-world environmental exposure tasks.</li>
+                    <li>Executing rigorous technical stress tests on mechatronic architectures under extreme load conditions; structuring physical data telemetry to validate structural and thermal boundaries.</li>
+                    <li>Evaluating EU industry compliance standards and SOPs to maintain safe lab practices during live high-voltage prototyping.</li>
+                </ul>
+            </div>
+            <div class="tl-item reveal">
+                <div class="tl-date">Jul 2023 – Aug 2025</div>
+                <div class="tl-title">Maintenance Engineer</div>
+                <div class="tl-company">Epsilon Advanced Materials Pvt. Ltd., Bellary · India</div>
+                <ul class="tl-bullets">
+                    <li>Implemented sensor-driven Condition-Based Monitoring (CBM) on 12+ industrial equipment units; analysed multi-sensor data streams to detect anomalies and predict failures.</li>
+                    <li>Managed mechanical maintenance of Carbon Furnaces, HPPs, and EOT cranes; applied vibration analysis to assess rotating machinery health.</li>
+                    <li>Authored P&amp;IDs, PFDs, SOPs, and maintenance checklists; handled SAP PM material management and PR creation.</li>
+                </ul>
+            </div>
+            <div class="tl-item reveal">
+                <div class="tl-date">May 2020 – Aug 2023</div>
+                <div class="tl-title">Freelance Design &amp; Prototyping Engineer</div>
+                <div class="tl-company">Technolkar Innovations, Belagavi · India</div>
+                <ul class="tl-bullets">
+                    <li>Delivered 30+ engineering project solutions: CAD design (SolidWorks, CATIA, Fusion 360), IoT/Arduino prototyping, laser cutting, and 3D printing.</li>
+                    <li>Mentored 20+ academic teams on embedded systems and Industrial IoT (IIoT) problem statements.</li>
+                </ul>
+            </div>
+            <div class="tl-item reveal">
+                <div class="tl-date">Aug 2021 – Sep 2021</div>
+                <div class="tl-title">Industrial Intern</div>
+                <div class="tl-company">Bemco Hydraulics Pvt. Ltd., Belagavi · India</div>
+                <ul class="tl-bullets">
+                    <li>Hands-on experience with hydraulic presses, moulding presses, and special-purpose machines; worked with directional control and pressure relief valves.</li>
+                    <li>Applied GD&amp;T principles for engineering drawing interpretation; performed lathe &amp; milling operations.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title reveal">Projects</h2>
+        <div class="projects-grid">
+
+            <!-- VEGATAM -->
+            <div class="project-card reveal">
+                <div class="slideshow" data-index="0">
+                    <img src="project-vegatum-1.jpg" class="active" alt="VEGATAM Go-Kart 1" loading="lazy" />
+                    <img src="project-vegatum-2.jpg" alt="VEGATAM Go-Kart 2" loading="lazy" />
+                    <img src="project-vegatum-3.jpg" alt="VEGATAM Go-Kart 3" loading="lazy" />
+                    <button class="slide-btn slide-prev">&#8249;</button>
+                    <button class="slide-btn slide-next">&#8250;</button>
+                    <div class="slide-dots">
+                        <span class="slide-dot active"></span>
+                        <span class="slide-dot"></span>
+                        <span class="slide-dot"></span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <span class="p-tag">🏆 FLAGSHIP · 2019 – 2023</span>
+                    <h3>VEGATAM Go-Kart &amp; E-Kart</h3>
+                    <p>Led a 15-member team as Team Captain &amp; Design Head for the All India Racing Championship. Designed chassis in SolidWorks; validated load cases via ANSYS FEM. Secured AIR 8th overall, 1st Runner-up in Design &amp; CAE, and Social Media Award.</p>
+                    <div class="p-meta">
+                        <span class="tag">SolidWorks</span><span class="tag">ANSYS</span>
+                        <span class="tag">Team Leadership</span><span class="tag">Vehicle Dynamics</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SENSOR FUSION -->
+            <div class="project-card reveal">
+                <div class="no-photo">📡</div>
+                <div class="project-body">
+                    <span class="p-tag">ACADEMIC · Oct 2025 – Jan 2026</span>
+                    <h3>Sensor Fusion for Autonomous Driving</h3>
+                    <p>Analysed fog effects on LiDAR/RADAR using 3M+ point cloud measurements — 94.8% intensity drop in LiDAR vs 0% in RADAR. Built camera-LiDAR fusion pipeline with YOLOv8; achieved 2.40 m median distance error over 98 detections.</p>
+                    <div class="p-meta">
+                        <span class="tag">LiDAR/RADAR</span><span class="tag">YOLOv8</span>
+                        <span class="tag">ROS2</span><span class="tag">Python</span><span class="tag">OpenCV</span>
+                    </div>
+                    <div class="p-report">
+                        <a href="Sensor Fusion report.pdf" target="_blank">📄 View Report</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AMR -->
+            <div class="project-card reveal">
+                <div class="slideshow" data-index="0">
+                    <img src="project-amr-1.jpg" class="active" alt="AMR 1" loading="lazy" />
+                    <img src="project-amr-2.jpg" alt="AMR 2" loading="lazy" />
+                    <img src="project-amr-3.jpg" alt="AMR 3" loading="lazy" />
+                    <img src="project-amr-4.jpg" alt="AMR 4" loading="lazy" />
+                    <img src="project-amr-5.jpg" alt="AMR 5" loading="lazy" />
+                    <img src="project-amr-6.jpg" alt="AMR 6" loading="lazy" />
+                    <button class="slide-btn slide-prev">&#8249;</button>
+                    <button class="slide-btn slide-next">&#8250;</button>
+                    <div class="slide-dots">
+                        <span class="slide-dot active"></span><span class="slide-dot"></span>
+                        <span class="slide-dot"></span><span class="slide-dot"></span>
+                        <span class="slide-dot"></span><span class="slide-dot"></span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <span class="p-tag">FINAL YEAR · Nov 2022 – May 2023</span>
+                    <h3>Multi-Purpose AMR — Warehouse Robot</h3>
+                    <p>Designed and built a multi-purpose Autonomous Mobile Robot for warehouse automation, integrating a forklift, vertical carousel storage system, and Cartesian robotic arm. LiDAR-based SLAM navigation with IoT mobile control. Prototype — core navigation and subsystem integration demonstrated.</p>
+                    <div class="p-meta">
+                        <span class="tag">ROS</span><span class="tag">LiDAR/SLAM</span>
+                        <span class="tag">IoT</span><span class="tag">MATLAB</span><span class="tag">SolidWorks</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AGROBOT -->
+            <div class="project-card reveal">
+                <div class="slideshow" data-index="0">
+                    <img src="project-agrobot-1.jpg" class="active" alt="AgroBot 1" loading="lazy" />
+                    <img src="project-agrobot-2.jpg" alt="AgroBot 2" loading="lazy" />
+                    <img src="project-agrobot-3.jpg" alt="AgroBot 3" loading="lazy" />
+                    <button class="slide-btn slide-prev">&#8249;</button>
+                    <button class="slide-btn slide-next">&#8250;</button>
+                    <div class="slide-dots">
+                        <span class="slide-dot active"></span>
+                        <span class="slide-dot"></span>
+                        <span class="slide-dot"></span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <span class="p-tag">PROTOTYPE · 2022</span>
+                    <h3>AgroBot — IoT Agriculture Robot</h3>
+                    <p>Multi-function IoT agriculture robot for seed sowing, water/fertilizer dispensing, soil ploughing, and grass cutting — all controllable via mobile IoT app. Integrated relay-controlled actuators and pump-driven dispenser on a wheeled base for field traversal.</p>
+                    <div class="p-meta">
+                        <span class="tag">Arduino</span><span class="tag">IoT</span>
+                        <span class="tag">Relay Control</span><span class="tag">Embedded C</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRITBOT -->
+            <div class="project-card reveal">
+                <div class="slideshow" data-index="0">
+                    <img src="project-critbot-1.jpg" class="active" alt="CritBot 1" loading="lazy" />
+                    <img src="project-critbot-2.jpg" alt="CritBot 2" loading="lazy" />
+                    <img src="project-critbot-3.jpg" alt="CritBot 3" loading="lazy" />
+                    <button class="slide-btn slide-prev">&#8249;</button>
+                    <button class="slide-btn slide-next">&#8250;</button>
+                    <div class="slide-dots">
+                        <span class="slide-dot active"></span>
+                        <span class="slide-dot"></span>
+                        <span class="slide-dot"></span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <span class="p-tag">PROTOTYPE · 2022</span>
+                    <h3>CritBot — Inspection &amp; Surveillance Robot</h3>
+                    <p>4-wheeled all-terrain IoT robot for remote surveillance in hazardous environments — mines, disaster zones. Mounted with a multi-axis servo robotic arm for object interaction and camera positioning. Wireless IoT mobile control for real-time monitoring from a safe distance.</p>
+                    <div class="p-meta">
+                        <span class="tag">Arduino</span><span class="tag">Servo Motors</span>
+                        <span class="tag">IoT</span><span class="tag">All-Terrain</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MINILIFT -->
+            <div class="project-card reveal">
+                <div class="slideshow" data-index="0">
+                    <img src="project-minilift-1.jpg" class="active" alt="MiniLift" loading="lazy" />
+                </div>
+                <div class="project-body">
+                    <span class="p-tag">LEARNING PROJECT · 2021</span>
+                    <h3>MiniLift — IoT Forklift Prototype</h3>
+                    <p>Designed and built an IoT-controlled forklift prototype capable of lifting payloads up to 2 kg. Integrated motorised fork mechanism with wireless mobile control for raise/lower and drive operations. Built to understand material handling automation and electromechanical actuation.</p>
+                    <div class="p-meta">
+                        <span class="tag">Arduino</span><span class="tag">IoT</span>
+                        <span class="tag">Motor Control</span><span class="tag">Mechanical Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIRTUAL DOCTOR -->
+            <div class="project-card reveal">
+                <div class="slideshow" data-index="0">
+                    <img src="Project-virtualDoctor-1.jpg" class="active" alt="Virtual Doctor 1" loading="lazy" />
+                    <img src="Project-VirtualDoctor-2.jpg" alt="Virtual Doctor 2" loading="lazy" />
+                    <img src="project-virtualdoctor-3.jpg" alt="Virtual Doctor 3" loading="lazy" />
+                    <img src="Project-VirtualDoctor-4.jpg" alt="Virtual Doctor 4" loading="lazy" />
+                    <button class="slide-btn slide-prev">&#8249;</button>
+                    <button class="slide-btn slide-next">&#8250;</button>
+                    <div class="slide-dots">
+                        <span class="slide-dot active"></span><span class="slide-dot"></span>
+                        <span class="slide-dot"></span><span class="slide-dot"></span>
+                    </div>
+                </div>
+                <div class="project-body">
+                    <span class="p-tag">🥇 1ST PRIZE · Jun – Nov 2022</span>
+                    <h3>Virtual Doctor Robot</h3>
+                    <p>Tele-operated health monitoring robot for remote patient checks. Integrated physiological sensors with signal flow management between sensors, processing unit, and output modules. Won 1st Prize at PIONEER 2022 — National Level, ISTE Chapter, Kolhapur.</p>
+                    <div class="p-meta">
+                        <span class="tag">Arduino</span><span class="tag">Bio-Sensors</span>
+                        <span class="tag">Embedded C</span><span class="tag">IoT</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="container">
+        <h2 class="section-title reveal">Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-group reveal">
+                <h4>Programming</h4>
+                <ul><li>Python</li><li>C / C++</li><li>MATLAB / Simulink</li><li>Git / GitHub</li><li>OpenCV</li><li>YOLOv8</li></ul>
+            </div>
+            <div class="skill-group reveal">
+                <h4>Robotics &amp; Automation</h4>
+                <ul><li>ROS2 (Jazzy)</li><li>LiDAR / RADAR Perception</li><li>Multi-Sensor Fusion</li><li>Closed-Loop Control</li><li>Actuators &amp; Sensors</li></ul>
+            </div>
+            <div class="skill-group reveal">
+                <h4>CAD / CAE</h4>
+                <ul><li>SolidWorks</li><li>CATIA</li><li>Fusion 360</li><li>AutoCAD</li><li>ANSYS (FEM / CFD)</li><li>GD&amp;T</li></ul>
+            </div>
+            <div class="skill-group reveal">
+                <h4>Embedded &amp; Hardware</h4>
+                <ul><li>Arduino / ESP32</li><li>Raspberry Pi</li><li>MQTT</li><li>PCB Debugging</li><li>3D Printing / CNC</li></ul>
+            </div>
+            <div class="skill-group reveal">
+                <h4>Maintenance &amp; Reliability</h4>
+                <ul><li>Condition-Based Monitoring</li><li>Vibration Analysis</li><li>Predictive Maintenance</li><li>SAP PM</li><li>P&amp;IDs / PFDs / SOPs</li></ul>
+            </div>
+            <div class="skill-group reveal">
+                <h4>Languages</h4>
+                <ul><li>English — C1 Fluent</li><li>German — A2 Learning</li><li>Hindi — C2 Native</li><li>Marathi — C2 Native</li><li>Kannada — Fluent</li></ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+    <div class="container">
+        <h2 class="section-title reveal">Education</h2>
+        <div class="edu-cards">
+            <div class="edu-card reveal">
+                <div>
+                    <div class="degree">M.Sc. in Mechatronics</div>
+                    <div class="institution">Ravensburg-Weingarten University (RWU), Germany</div>
+                    <div class="focus">Advanced Control Systems · LiDAR/RADAR · Industrial Robotics · IoT &amp; Embedded Systems</div>
+                </div>
+                <div class="period">Oct 2025 – Present</div>
+            </div>
+            <div class="edu-card reveal">
+                <div>
+                    <div class="degree">B.E. in Mechanical Engineering &nbsp;<span style="color:var(--muted);font-weight:400;font-size:.85rem">— 8.3 CGPA</span></div>
+                    <div class="institution">KLE Dr. MSSCET, VTU, India</div>
+                    <div class="focus">System Design · Robotics · CAD/CAE · Manufacturing · Technical Documentation</div>
+                </div>
+                <div class="period">Aug 2019 – May 2023</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+    <div class="container">
+        <h2 class="section-title reveal">Certifications &amp; Achievements</h2>
+        <div class="cert-list">
+            <div class="cert-item reveal"><span class="cert-icon">🎓</span><div><div class="cert-name">Getting Started with AI on Jetson Nano</div><div class="cert-source">NVIDIA Deep Learning Institute · 2024</div></div></div>
+            <div class="cert-item reveal"><span class="cert-icon">🤖</span><div><div class="cert-name">AI For Everyone</div><div class="cert-source">DeepLearning.AI · 2024</div></div></div>
+            <div class="cert-item reveal"><span class="cert-icon">🦾</span><div><div class="cert-name">ROS2 for Beginners</div><div class="cert-source">Udemy · 2025</div></div></div>
+            <div class="cert-item reveal"><span class="cert-icon">🔧</span><div><div class="cert-name">SolidWorks 3D Modeling &amp; Simulation</div><div class="cert-source">2023</div></div></div>
+            <div class="cert-item reveal"><span class="cert-icon">🏆</span><div><div class="cert-name">1st Prize – Virtual Doctor Robot</div><div class="cert-source">PIONEER 2022 · National · ISTE Kolhapur</div></div></div>
+            <div class="cert-item reveal"><span class="cert-icon">🏎️</span><div><div class="cert-name">All-India Rank 8th – Go-Kart Championship</div><div class="cert-source">AIRC National Racing · 2023</div></div></div>
+            <div class="cert-item reveal"><span class="cert-icon">📢</span><div><div class="cert-name">1st Prize – Paper Presentation</div><div class="cert-source">TECHNOCRAT 2K22 · National Level</div></div></div>
+            <div class="cert-item reveal"><span class="cert-icon">⭐</span><div><div class="cert-name">11 National-Level Exhibition Awards</div><div class="cert-source">6× 1st Place · 5× 2nd Place</div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <h2 class="section-title reveal" style="justify-content:center;border-left:none;padding-left:0;text-align:center;">Get In Touch</h2>
+        <p class="reveal">Actively seeking <strong>Werkstudent or Internship</strong> opportunities in Robotics, Automation, Mechatronics, and Embedded Systems across Germany. Let's build something great together.</p>
+        <div class="contact-links reveal">
+            <a class="contact-btn" href="mailto:Yashsachitanand.dongre@gmail.com">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                Yashsachitanand.dongre@gmail.com
+            </a>
+            <a class="contact-btn" href="https://www.linkedin.com/in/yash-dongre-/" target="_blank">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+            </a>
+            <a class="contact-btn" href="https://github.com/yashstudy2025-collab" target="_blank">
+                <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38l-.01-1.34c-2.22.48-2.69-1.07-2.69-1.07-.36-.92-.88-1.17-.88-1.17-.72-.49.05-.48.05-.48.8.06 1.22.82 1.22.82.71 1.22 1.87.87 2.32.66.07-.52.28-.87.51-1.07-1.77-.2-3.63-.89-3.63-3.95 0-.87.31-1.58.82-2.14-.08-.2-.36-1.01.08-2.11 0 0 .67-.21 2.2.82A7.68 7.68 0 0 1 8 3.8c.68 0 1.36.09 2 .27 1.52-1.03 2.19-.82 2.19-.82.44 1.1.16 1.91.08 2.11.51.56.82 1.27.82 2.14 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38C13.71 14.53 16 11.54 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                GitHub
+            </a>
+            <a class="contact-btn" href="tel:+4915511822195">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.28-.28.67-.36 1.02-.25 1.12.37 2.32.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.26.2 2.45.57 3.57.1.35.02.74-.25 1.02l-2.2 2.2z"/></svg>
+                +49 155 1182 2195
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Yash Sachitanand Dongre &nbsp;·&nbsp; Weingarten, Germany &nbsp;·&nbsp; Built for GitHub Pages</p>
+</footer>
+
+<script>
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.1 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Slideshows
+    document.querySelectorAll('.slideshow').forEach(ss => {
+        const imgs  = ss.querySelectorAll('img');
+        const dots  = ss.querySelectorAll('.slide-dot');
+        const prev  = ss.querySelector('.slide-prev');
+        const next  = ss.querySelector('.slide-next');
+        if (imgs.length <= 1) {
+            if (prev) prev.style.display = 'none';
+            if (next) next.style.display = 'none';
+            return;
+        }
+        let cur = 0;
+        function go(n) {
+            imgs[cur].classList.remove('active');
+            if (dots[cur]) dots[cur].classList.remove('active');
+            cur = (n + imgs.length) % imgs.length;
+            imgs[cur].classList.add('active');
+            if (dots[cur]) dots[cur].classList.add('active');
+        }
+        if (prev) prev.addEventListener('click', () => go(cur - 1));
+        if (next) next.addEventListener('click', () => go(cur + 1));
+        dots.forEach((d, i) => d.addEventListener('click', () => go(i)));
+        // Auto-advance every 4s
+        setInterval(() => go(cur + 1), 4000);
+    });
+</script>
+
+</body>
+</html>
