@@ -191,6 +191,74 @@
         /* SCROLL REVEAL */
         .reveal { opacity: 0; transform: translateY(24px); transition: opacity .55s ease, transform .55s ease; }
         .reveal.visible { opacity: 1; transform: none; }
+
+        /* ── MOBILE RESPONSIVE ────────────────────────────────── */
+        @media (max-width: 768px) {
+            /* Nav — hide text links, show logo only */
+            .nav-links { display: none; }
+            nav { padding: 0 1.2rem; }
+
+            /* Hero */
+            #hero { padding: 5rem 1.2rem 3rem; min-height: auto; }
+            .avatar-wrap { width: 100px; height: 100px; }
+            #hero h1 { font-size: 1.8rem; }
+            .hero-tagline { font-size: .9rem; }
+            .hero-sub { font-size: .8rem; }
+            .badge-row { gap: .4rem; }
+            .badge { font-size: .72rem; padding: .25rem .65rem; }
+            .hero-cta { gap: .7rem; }
+            .btn { padding: .5rem 1.1rem; font-size: .82rem; }
+            .social-row { gap: .9rem; flex-wrap: wrap; }
+            .social-row a { font-size: .78rem; }
+
+            /* Sections */
+            section { padding: 3rem 1.2rem; }
+            .section-title { font-size: 1.2rem; }
+
+            /* About */
+            .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+            .stat-card .num { font-size: 1.4rem; }
+
+            /* Experience */
+            .timeline { padding-left: 1.2rem; }
+            .tl-item { padding: 0 0 1.8rem 1.2rem; }
+            .tl-title { font-size: .92rem; }
+            .tl-bullets li { font-size: .8rem; }
+
+            /* Projects */
+            .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
+            .slideshow { height: 220px; }
+            .slide-btn { width: 36px; height: 36px; font-size: 1rem; }
+            .project-body { padding: 1rem; }
+            .project-body h3 { font-size: .92rem; }
+            .project-body p { font-size: .8rem; }
+
+            /* Skills */
+            .skills-grid { grid-template-columns: 1fr 1fr; gap: .8rem; }
+            .skill-group { padding: .9rem; }
+            .skill-group h4 { font-size: .75rem; }
+            .skill-group ul li { font-size: .78rem; }
+
+            /* Education */
+            .edu-card { flex-direction: column; gap: .5rem; padding: 1rem; }
+            .edu-card .degree { font-size: .9rem; }
+            .edu-card .focus { font-size: .75rem; }
+
+            /* Certifications */
+            .cert-list { grid-template-columns: 1fr; gap: .7rem; }
+
+            /* Contact */
+            .contact-links { flex-direction: column; align-items: stretch; }
+            .contact-btn { justify-content: center; padding: .85rem 1rem; font-size: .82rem; }
+        }
+
+        @media (max-width: 400px) {
+            #hero h1 { font-size: 1.5rem; }
+            .about-stats { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .badge { font-size: .68rem; }
+        }
     </style>
 </head>
 <body>
@@ -205,7 +273,18 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
+    <!-- Mobile hamburger -->
+    <button id="mob-menu-btn" aria-label="Menu" style="display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:.4rem;font-size:1.4rem;line-height:1;">&#9776;</button>
 </nav>
+<!-- Mobile nav drawer -->
+<div id="mob-drawer" style="display:none;position:fixed;top:56px;left:0;right:0;z-index:199;background:rgba(13,17,23,.97);border-bottom:1px solid var(--border);padding:1rem 1.5rem;flex-direction:column;gap:.2rem;">
+    <a href="#about"        onclick="closeMob()" style="display:block;padding:.7rem 0;color:var(--muted);font-size:.95rem;border-bottom:1px solid var(--border);">About</a>
+    <a href="#experience"   onclick="closeMob()" style="display:block;padding:.7rem 0;color:var(--muted);font-size:.95rem;border-bottom:1px solid var(--border);">Experience</a>
+    <a href="#projects"     onclick="closeMob()" style="display:block;padding:.7rem 0;color:var(--muted);font-size:.95rem;border-bottom:1px solid var(--border);">Projects</a>
+    <a href="#skills"       onclick="closeMob()" style="display:block;padding:.7rem 0;color:var(--muted);font-size:.95rem;border-bottom:1px solid var(--border);">Skills</a>
+    <a href="#certifications" onclick="closeMob()" style="display:block;padding:.7rem 0;color:var(--muted);font-size:.95rem;border-bottom:1px solid var(--border);">Certifications</a>
+    <a href="#contact"      onclick="closeMob()" style="display:block;padding:.7rem 0;color:var(--accent);font-size:.95rem;">Contact</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -587,6 +666,22 @@
 </footer>
 
 <script>
+    // Mobile nav
+    const mobBtn    = document.getElementById('mob-menu-btn');
+    const mobDrawer = document.getElementById('mob-drawer');
+    function closeMob() { mobDrawer.style.display = 'none'; mobBtn.innerHTML = '&#9776;'; }
+    mobBtn.addEventListener('click', () => {
+        const open = mobDrawer.style.display === 'flex';
+        mobDrawer.style.display = open ? 'none' : 'flex';
+        mobBtn.innerHTML = open ? '&#9776;' : '&#10005;';
+    });
+    function showHamburger() {
+        mobBtn.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+        if (window.innerWidth > 768) closeMob();
+    }
+    window.addEventListener('resize', showHamburger);
+    showHamburger();
+
     // Scroll reveal
     const observer = new IntersectionObserver(
         entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
